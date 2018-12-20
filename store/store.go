@@ -29,6 +29,6 @@ func FindUser(email, password string) (user User, err error) {
 	return User{}, sql.ErrNoRows
 }
 
-func Users() (users []User) {
+func Users() []User {
 	return users
 }

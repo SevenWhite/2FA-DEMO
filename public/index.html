@@ -9,6 +9,29 @@
 <body>
 	<div id="app">
 		{{message}}
+
+		<div v-if="user === null">
+			<h2>Login without 2FA</h2>
+			<input type="email" placeholder="email" name="email" required />
+			<input type="password" placeholder="password" name="password" required />
+			<button type="submit">Sign In</button>
+		</div>
+
+		<h2>The list of users</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>Email</th>
+				<th>Password</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr v-for="u in users">
+				<td>{{u.email}}</td>
+				<td>{{u.password}}</td>
+			</tr>
+			</tbody>
+		</table>
 	</div>
 	<script src="/public/main.js"></script>
 </body>

@@ -2,11 +2,13 @@ var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Vue!',
-    users: []
+    users: [],
+    user: null,
   },
   mounted() {
     fetch('/users')
-        .then(resp => console.log('users', resp.data))
+        .then(resp => resp.json())
+        .then(users => this.users = users)
         .catch(err => console.error(err))
   }
 });
