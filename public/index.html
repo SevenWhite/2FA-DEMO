@@ -5,16 +5,40 @@
 	<title>LUMIN 2FA</title>
 	<!-- development version, includes helpful console warnings -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style>
+		.red {
+			color: red;
+		}
+		.green {
+			color: green;
+		}
+	</style>
 </head>
 <body>
 	<div id="app">
 		{{message}}
 
-		<div v-if="user === null">
+		<div v-if="false && user === null">
 			<h2>Login without 2FA</h2>
 			<input type="email" placeholder="email" name="email" required />
 			<input type="password" placeholder="password" name="password" required />
 			<button type="submit">Sign In</button>
+		</div>
+
+		<div v-if="user !== null">
+			<h2>QR</h2>
+			<img :src="`/users/${user.email}/qr`" alt="qr" />
+
+			<h2>Please enter the passcode to sign IN</h2>
+			<form @submit.prevent="validate">
+				<input type="text" placeholder="passcode" v-model="passcode" name="passcode" />
+				<button type="submit">Sign IN</button>
+			</form>
+
+			<div v-if="touched">
+				<p class="green" v-if="result">Your code is valid</p>
+				<p class="red" v-if="!result">Your code isn't valid</p>
+			</div>
 		</div>
 
 		<h2>The list of users</h2>
@@ -23,12 +47,16 @@
 			<tr>
 				<th>Email</th>
 				<th>Password</th>
+				<th>Actions</th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr v-for="u in users">
 				<td>{{u.email}}</td>
 				<td>{{u.password}}</td>
+				<td>
+					<button type="button" @click="selectUser(u.email)">Generate QR</button>
+				</td>
 			</tr>
 			</tbody>
 		</table>
