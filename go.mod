@@ -1,7 +1,7 @@
 module github.com/SevenWhite/2FA-DEMO
 
 require (
-	github.com/labstack/echo v3.3.5+incompatible // indirect
+	github.com/labstack/echo v3.3.5+incompatible
 	github.com/labstack/gommon v0.2.8 // indirect
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
